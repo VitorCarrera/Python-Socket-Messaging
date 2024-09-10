@@ -7,7 +7,7 @@ def gerar_resposta(mensagem):
         return "Sou apenas um servidor"
     elif "Qual é a melhor linguagem de programação?" in mensagem.lower():
         return "A melhor linguagem de programação é o C#"
-    elif "encerrar" or "saiu" in mensagem.lower():
+    elif "encerrar" in mensagem.lower() or "saiu" in mensagem.lower():
         return "Encerrando conexão!"
     else: 
         return "Não entendi sua mensagem"
@@ -30,8 +30,18 @@ while True:
     while True: 
         # Recebendo mensagem do cliente
         data = conn.recv(1024)
+        if not data:
+            break
+
         print(f"Mensagem recebida: {data.decode()}")
 
         # Respondendo ao cliente
-        conn.sendall(b"Mensagem recebida pelo servidor")
-        conn.close()
+        resposta = gerar_resposta(data)
+        conn.sendall(resposta.encode())
+
+        # Fechar a conexão se o cliente enviou "saiu" ou "encerrar"
+        if "encerrar" in data.lower() or "saiu" in data.lower():
+            break
+
+
+    conn.close()
