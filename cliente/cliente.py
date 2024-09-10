@@ -11,13 +11,14 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect(('localhost', 12345))
 
 
+while True: 
 
-# Enviando um mensagem para o servidor
-message = "Olá, servidor!!"
-client_socket.sendall(message.encode())
+    # Enviando um mensagem para o servidor
+    message = input("Digite sua mensagem (ou 'saiu' ou 'encerrar' para encerrar): ")
+    enviar_mensagem(client_socket, message)
 
-# Recebendo resposta do servidor
-data = client_socket.recv(1024)
-print(f"Resposta do servidor {data.decode()}")
+    # Encerrar a conexão se o cliente enviar "saiu" ou "encerrar"
+    if "encerrar" in message.lower() or "saiu" in message.lower():
+        break
 
 client_socket.close()
