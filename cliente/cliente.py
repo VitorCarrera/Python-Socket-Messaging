@@ -3,7 +3,7 @@ import socket
 def enviar_mensagem(cliente_socket, mensagem):
     cliente_socket.sendall(mensagem.encode())
     data = cliente_socket.recv(1024)
-    print(f"Resposta do servidor: {data:decode()}")
+    print(f"Resposta do servidor: {data.decode()}")
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
