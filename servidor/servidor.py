@@ -1,5 +1,11 @@
 import socket
 import threading
+import sys
+import os
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from api.weather_api import obter_temperatura
 
 def gerar_resposta(mensagem):
     if "olá" in mensagem.lower():
@@ -8,6 +14,8 @@ def gerar_resposta(mensagem):
         return "Sou apenas um servidor"
     elif "qual é a melhor linguagem de programação?" in mensagem.lower():
         return "A melhor linguagem de programação é o Python"
+    elif "qual é a temperatura no momento?" in mensagem.lower():
+        return obter_temperatura()
     elif "encerrar" in mensagem.lower() or "saiu" in mensagem.lower():
         return "Encerrando conexão!"
     else:
