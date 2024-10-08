@@ -8,19 +8,21 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from api.weather_api import obter_temperatura
 
 def gerar_resposta(mensagem):
-    if "olá" in mensagem.lower():
-        return "Olá, cliente! Como posso ajudar?"
-    elif "como você está?" in mensagem.lower():
-        return "Sou apenas um servidor"
-    elif "qual é a melhor linguagem de programação?" in mensagem.lower():
-        return "A melhor linguagem de programação é o Python"
-    elif "qual é a temperatura no momento?" in mensagem.lower():
-        return obter_temperatura()
-    elif "encerrar" in mensagem.lower() or "saiu" in mensagem.lower():
-        return "Encerrando conexão!"
-    else:
-        return "Não entendi sua mensagem"
+    mensagem = mensagem.lower()
     
+    match mensagem:
+        case "olá":
+            return "Olá, cliente! Como posso ajudar?"
+        case "como você está?":
+            return "Sou apenas um servidor"
+        case "qual é a melhor linguagem de programação?":
+            return "A melhor linguagem de programação é o Python"
+        case "qual é a temperatura no momento?":
+            return obter_temperatura()
+        case "encerrar" | "saiu":
+            return "Encerrando conexão!"
+        case _:
+            return "Não entendi sua mensagem"
 
 def tratar_cliente(conn, addr):
     print(f'Conectado por {addr}')
