@@ -9,7 +9,7 @@ from api.weather_api import obter_temperatura
 
 def gerar_resposta(mensagem):
     mensagem = mensagem.lower()
-    
+
     match mensagem:
         case "olá":
             return "Olá, cliente! Como posso ajudar?"
@@ -23,6 +23,8 @@ def gerar_resposta(mensagem):
             return "Encerrando conexão!"
         case _:
             return "Não entendi sua mensagem"
+
+            
 
 def tratar_cliente(conn, addr):
     print(f'Conectado por {addr}')
@@ -45,6 +47,7 @@ def tratar_cliente(conn, addr):
 
     conn.close()
     print(f'Conexão com {addr} encerrada.')
+
 
 
 # Criando um socket TCP/IP

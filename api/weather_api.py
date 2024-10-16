@@ -1,6 +1,10 @@
 import requests
+import os 
+from dotenv import load_dotenv
 
-API_KEY = 'd1cfe2c9049322cc65b53fdf195fd39d'
+load_dotenv()
+
+API_KEY = os.getenv('OPEN_WEATHER_KEY')
 
 def obter_temperatura():
     url = f"http://api.openweathermap.org/data/2.5/weather?q=Belém&appid={API_KEY}&units=metric"
@@ -14,6 +18,6 @@ def obter_temperatura():
 
             return f'A temperatura atual em Belém é {temperature}ºC.'
         else:
-            return "Não consegui obter a temperatuera no momento."
+            return "Não consegui obter a temperatura no momento."
     except:
         return "Ocorreu um erro ao acessar a API: {e}"
